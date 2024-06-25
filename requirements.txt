@@ -1,0 +1,8 @@
+﻿pycodestyle
+autopep8
+telethon==1.36.0
+requests==2.32.3
+pandas==2.2.2
+tqdm==4.66.4
+SQLAlchemy==2.0.31
+pybit==5.7.0
