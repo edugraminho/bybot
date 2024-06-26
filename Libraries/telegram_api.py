@@ -12,8 +12,8 @@ Copiar o arquivo gerado e jogar no repo do robo
 
 """
 
-API_ID = os.getenv("API_ID")
-API_HASH = os.getenv("API_HASH")
+API_ID = os.getenv("TEL_API_ID")
+API_HASH = os.getenv("TEL_API_HASH")
 
 logger = get_logger(__name__)
 
