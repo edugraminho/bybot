@@ -86,6 +86,7 @@ def trade():
                 db.update_signal(
                     {"status": "COMPLETED", "signal_type": "OK"}, signal.id
                 )
+                logger.info(f"Signal {signal.crypto_name} created successfully.")
             else:
                 db.update_signal(
                     {"status": "FAIL", "signal_type": "ERROR"}, signal.id
