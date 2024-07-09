@@ -6,10 +6,7 @@ from Libraries.telegram_api import get_messages_group
 from Libraries.handle_msg import handle_msgs
 from Libraries.futures import (
     get_all_open_positions_bybit,
-    get_current_price_crypto,
-    get_usdt_balance,
     get_all_open_positions_bybit,
-    get_all_orders,
     create_order_buy_long_or_short,
     find_value_to_aport,
     set_leverage,
@@ -36,13 +33,8 @@ def trade():
     all_signals = db.get_all_signals()
 
     all_positions = get_all_open_positions_bybit()
-    # logger.info(all_positions)
 
-    all_orders = get_all_orders()
-
-    balance = get_usdt_balance()
     for signal in all_signals:
-        # TODO achar a quantidade para inserir na ordem de compra
 
         for position in all_positions:
 

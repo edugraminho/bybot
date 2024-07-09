@@ -47,12 +47,13 @@ def get_usdt_balance():
 
 
 def get_current_price_crypto(crypto):
-    url = "https://api.bybit.com/v2/public/tickers"
-    params = {"symbol": crypto}
-    response = requests.get(url, params=params)
-    data = response.json()
+    # https://bybit-exchange.github.io/docs/v5/market/tickers
+    data = session.get_tickers(
+        category="inverse",
+        symbol=crypto,
+    )
 
-    return float(data["result"][0]["mark_price"])
+    return float(data["result"]["list"][0]["markPrice"])
 
 
 def find_value_to_aport(crypto):
@@ -235,15 +236,15 @@ def cancel_open_order(order_id):
     return session.cancel_active_order(order_id=order_id)
 
 
-def add_take_profit(crypto, direction, take_profit_price, quantity):
-    side = "Sell" if direction == "long" else "Buy"
-    return session.place_active_order(
+def add_take_profit(crypto, direction, tpsl_mode):
+    tp_price = calculate_price_take_profit(crypto, direction)
+
+    return session.set_trading_stop(
+        category="linear",
         symbol=crypto,
-        side=side,
-        order_type="TakeProfit",
-        take_profit=take_profit_price,
-        qty=quantity,
-        time_in_force="GoodTillCancel",
+        takeProfit=str(tp_price),
+        tpslMode=tpsl_mode,  # Full or Partial
+        positionIdx=1 if direction == "Buy" else 2,
     )
 
 
